@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <readline/readline.h>
 #include <readline/history.h>
+
+#include "lexer.h"
+#include "token.h"
 
 int main(void)
 {
@@ -38,7 +42,22 @@ int main(void)
             break;
         }
 
-        printf("YOU ENTERED : %s\n", line);
+        Token tokens[MAX_TOKENS];
+
+        int token_count =
+            lexer_tokenize(line, tokens, MAX_TOKENS);
+
+        printf("\nTokens:\n");
+
+        for (int i = 0; i < token_count; i++)
+        {
+            printf("  [%d] %-16s : %s\n",
+                   i,
+                   token_type_to_string(tokens[i].type),
+                   tokens[i].value);
+        }
+
+        printf("\n");
 
         free(line);
     }
