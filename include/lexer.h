@@ -3,6 +3,6 @@
 
 #include "token.h"
 
-int lexer_tokenize(const char *input, Token tokens[], int max_tokens);
+int lexer_tokenize(const char *input, TokenList *list);
 
 #endif
